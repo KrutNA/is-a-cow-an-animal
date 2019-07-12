@@ -19,25 +19,18 @@
   + A *rabbit* only eats carrots
   + A *human* eats carrots and **any** meat
 
-**IMPORTANT**:
+**IMPORTANT**: Feeding a cow with something else than grass is a fatal error (same for feeding a human with grass...) when slaughtered:
 
-Feeding a cow with something else than grass is a fatal error (same for feeding a human with grass...) when slaughtered:
-
-A *cow* becomes *meat of cow* 
-
-A *rabbit* becomes *meat of rabbit*
-
-A *human* becomes *meat of human*
+* A *cow* becomes *meat of cow* 
+* A *rabbit* becomes *meat of rabbit*
+* A *human* becomes *meat of human*
 
 ### [Idea from here](http://rigaux.org/language-study/various/is-a-cow-an-animal/)
 But with some changes, as you can see
 
 ### Building and tests
 
-Build: `$ cargo build`
-
-Tests: `$ cargo test`
-
-6 tests for [`food`](./src/food.rs) module
-
-11 tests for [`animal`](./src/animal.rs) module
+* Build: `$ cargo build`
+* Tests: `$ cargo test`
+  + 6 tests for [`food`](./src/food.rs) module
+  + 11 tests for [`animal`](./src/animal.rs) module
