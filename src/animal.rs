@@ -13,34 +13,32 @@ pub struct Animal {
     name: AnimalType,
     is_alive: bool,
     energy: u64,
-    foods: Vec<FoodType>,
 }
 
-fn init_food(animal_type: AnimalType) -> Vec<FoodType> {
-    match animal_type {
-        AnimalType::Human => 
-            vec![FoodType::Meat(AnimalType::Cow),
-                 FoodType::Meat(AnimalType::Human),
-                 FoodType::Meat(AnimalType::Rabbit),
-                 FoodType::Vegetable(PlantType::Carrot)],
-        AnimalType::Rabbit =>
-            vec![FoodType::Vegetable(PlantType::Carrot)],
-        AnimalType::Cow =>
-            vec![FoodType::Vegetable(PlantType::Grass)],
-    }
-}
+
+// fn init_food(animal_type: AnimalType) -> Vec<FoodType> {
+//     match animal_type {
+//         AnimalType::Human => 
+//             vec![FoodType::Meat(AnimalType::Cow),
+//                  FoodType::Meat(AnimalType::Human),
+//                  FoodType::Meat(AnimalType::Rabbit),
+//                  FoodType::Vegetable(PlantType::Carrot)],
+//         AnimalType::Rabbit =>
+//             vec![FoodType::Vegetable(PlantType::Carrot)],
+//         AnimalType::Cow =>
+//             vec![FoodType::Vegetable(PlantType::Grass)],
+//     }
+// }
 
 #[allow(dead_code)]
 impl Animal {
     
     pub fn new(animal_type: AnimalType) -> Animal {
-        Animal { name: animal_type, is_alive: true,
-                 energy: 0, foods: init_food(animal_type)}
+        Animal { name: animal_type, is_alive: true, energy: 0 }
     }
     
     pub fn new_e(animal_type: AnimalType, energy: u64) -> Animal {
-        Animal { name: animal_type, is_alive: true,
-                 energy: energy, foods: init_food(animal_type)}
+        Animal { name: animal_type, is_alive: true, energy: energy}
     }
     
     pub fn eat(&mut self, food: &mut Food) -> &mut Animal {
@@ -52,7 +50,7 @@ impl Animal {
             },
             FoodType::Vegetable(_) => (),
         };
-        self.energy += match self.foods.contains(&food.name()) {
+        self.energy += match self.check(food) {
             true => {
                 food.energy()
             },
@@ -89,6 +87,22 @@ impl Animal {
         self.energy = 0;
         tmp
     }
+    fn check(&self, food: &Food) -> bool {
+        match self.name {
+            AnimalType::Human => match food.name() {
+                FoodType::Meat(_) | FoodType::Vegetable(PlantType::Carrot) => true,
+                _ => false,
+            }
+            AnimalType::Cow => match food.name() {
+                FoodType::Vegetable(PlantType::Grass) => true,
+                _ => false,
+            }
+            AnimalType::Rabbit => match food.name() {
+                FoodType::Vegetable(PlantType::Carrot) => true,
+                _ => false,
+            }
+        }
+    } 
 }
 
 #[cfg(test)]
