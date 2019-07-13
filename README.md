@@ -1,4 +1,4 @@
-## Is Cow An Animal?
+## Is A Cow An Animal?
 ### Description of world:
 * Everything has some amount of energy
 * There are animals: cow, rabbit, human
